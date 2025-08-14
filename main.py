@@ -1,6 +1,9 @@
 from fastapi import FastAPI
+from dotenv import load_dotenv
+
+load_dotenv(".env")
+from Routes import base
 
 app=FastAPI()
-@app.get("/welcome")
-def read_root():
-    return {"Hello": "RAG-Application"}
+
+app.include_router(base.Base_router)
