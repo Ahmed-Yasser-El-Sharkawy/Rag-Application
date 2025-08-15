@@ -4,7 +4,7 @@ class settings (BaseSettings):
     APP_Version: str
     APP_Name: str
     OPENAI_API_KEY: str
-    FILE_ALLOWED_EXTENSIONS: list[str]
+    FILE_ALLOWED_TYPES: list
     FILE_MAX_SIZE: int
 
     model_config = SettingsConfigDict(env_file=".env")
