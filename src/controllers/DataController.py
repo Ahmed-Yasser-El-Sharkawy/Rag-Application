@@ -16,17 +16,21 @@ class DataController(BaseController):
             return False,ResponseSignal.FILE_SIZE_EXCEEDS_LIMIT
         return True ,ResponseSignal.FILE_VALIDATED_SUCCESS
 
-    def Generate_unique_File_Name(self, orgin_file: str,project_id:str):
+    def Generate_unique_Filepath(self, orgin_file: str,project_id:str):
         random_key= self.generate_random_string()
         project_path=ProjectController().get_project_path(project_id=project_id)
         cleaned_file_name = self.get_clean_filename(original_filename=orgin_file)
 
         new_file_path=os.path.join(project_path,random_key + "_" +  cleaned_file_name)
+        
         while os.path.exists(new_file_path):
             random_key = self.generate_random_string()
-            new_file_path = os.path.join(project_path, random_key + "_" + cleaned_file_name)
-        return new_file_path
-        
+            new_file_path = os.path.join(
+                project_path, 
+                random_key + "_" + cleaned_file_name
+                )
+
+        return new_file_path, random_key + "_" + cleaned_file_name
 
     def get_clean_filename(self, original_filename: str) -> str:
         """Generate a clean filename by removing unwanted characters."""

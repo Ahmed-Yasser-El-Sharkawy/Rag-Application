@@ -29,7 +29,7 @@ async def upload_data(project_id: str,file:UploadFile,
         )
 
     project_dir_path = ProjectController().get_project_path(project_id)
-    new_file_name = data_controller.Generate_unique_File_Name(
+    new_file_name ,file_id = data_controller.Generate_unique_Filepath(
         orgin_file=file.filename,
         project_id=project_id
     )
@@ -51,5 +51,8 @@ async def upload_data(project_id: str,file:UploadFile,
 
     return JSONResponse(
         status_code=status.HTTP_201_CREATED,
-        content={"message": ResponseSignal.FILE_UPLOAD_SUCCESS}
+        content={
+            "message": ResponseSignal.FILE_UPLOAD_SUCCESS,
+            "file_id": file_id
+        }
     )
