@@ -35,7 +35,7 @@ class DataController(BaseController):
     def get_clean_filename(self, original_filename: str) -> str:
         """Generate a clean filename by removing unwanted characters."""
         # Remove special characters and keep only alphanumeric characters and dots
-        cleaned_file_name = re.sub(r'\W+', '', original_filename.strip())
+        cleaned_file_name = re.sub(r'[^\w.]', '', original_filename.strip())
         #
         cleaned_file_name = cleaned_file_name.replace(' ', '_')
         return cleaned_file_name
